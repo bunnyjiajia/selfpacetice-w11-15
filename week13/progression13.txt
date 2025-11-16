@@ -1,0 +1,57 @@
+Cookie คืออะไร?
+    Cookie คือข้อมูลขนาดเล็กที่เว็บเบราว์เซอร์เก็บไว้ฝั่งผู้ใช้ ใช้เก็บข้อมูลสำคัญที่ต้องจำไว้ระหว่างการใช้งาน เช่น
+    ผู้ใช้ Login อยู่ไหม
+    ผู้ใช้เป็นใคร (session ID)
+    การตั้งค่าของผู้ใช้
+    สินค้าที่ใส่ในตะกร้า
+    คอนฟิก UI เช่น Dark Mode
+    Tracking ข้อมูลพฤติกรรมผู้ใช้ (Analytics)
+Cookie จะถูกส่งไป-กลับกับ Server อัตโนมัติทุกครั้งที่โหลดหน้าเว็บใหม่
+
+แล้วทำไมถึงต้องใช้ Cookie? (ทำไปทำไม)
+1.เพราะ HTTP เป็น Stateless
+    HTTP เป็นโปรโตคอลแบบ “ลืมทุกอย่างทุกครั้ง” มันไม่จำว่าคุณคือคนเดิม
+    Cookie ทำหน้าที่ “ช่วยจำผู้ใช้”
+
+2.ใช้จัดการ Login / Authentication / Session
+    ผู้ใช้ login → server สร้าง session → เก็บ session_id ใน cookie
+    reload หน้าเว็บกี่ครั้งก็ยังเป็น “คนเดิม”
+    ไม่ต้อง login ซ้ำทุกหน้า
+
+3.ใช้ในการ Tracking พฤติกรรมผู้ใช้
+ตัวอย่าง
+    Google Analytics
+    Facebook Pixel
+    ระบบโฆษณา
+ทำให้รู้ว่า
+    ผู้ใช้อ่านหน้าบทความอะไร
+    เคยดูสินค้าอะไร
+    เอาไปทำ Personalized Ads
+ข้อนี้เป็นเหตุผลที่มีกฎหมาย PDPA / GDPR มาควบคุม
+
+ประเภท Cookie สำคัญ (แบบที่ Dev ต้องรู้)
+1 Session Cookie
+หมดอายุทันทีเมื่อปิด browser
+ใช้ทำ session login
+
+2 Persistent Cookie
+มีวันหมดอายุ
+ใช้จำผู้ใช้ได้นานๆ เช่น 7 วัน, 30 วัน
+
+3 HttpOnly Cookie
+JavaScript อ่านไม่ได้
+ปลอดภัยจาก XSS
+ใช้เก็บ session login string
+
+4 Secure Cookie
+ส่งได้เฉพาะ HTTPS
+ป้องกัน sniffing
+
+5 SameSite cookie
+กัน CSRF
+SameSite=Lax (ค่า default)
+SameSite=Strict
+SameSite=None; Secure (ใช้กับ cross-site)
+
+ถ้าเป็น Authentication ควรใช้ Cookie (HttpOnly, Secure)
+ถ้าเป็น ข้อมูลทั่วไป → ใช้ LocalStorage ดีกว่า

@@ -1,0 +1,36 @@
+Fetch คือกระบวนการที่ Frontend (Client) ส่งคำร้องขอข้อมูลไปยัง Backend (Server) แล้วรับผลลัพธ์กลับมา
+1. Client-Server Architecture
+Client (FE): แอปหรือเว็บที่ผู้ใช้เห็น
+Server (BE): จัดการข้อมูล, logic, database
+การ fetch เป็น HTTP request-response cycle (คำร้องขอ HTTP → การตอบกลับ HTTP)
+
+2.Request และ Response
+Request ประกอบด้วย
+    Method: GET, POST, PUT, DELETE, ฯลฯ
+    URL/Endpoint: ที่อยู่ของ API
+    Headers: metadata เช่น Content-Type, Authorization
+    Body: ข้อมูลส่งไป (สำหรับ POST/PUT)
+Response ประกอบด้วย
+    Status code: 200, 404, 500, ฯลฯ
+    Headers: metadata ของ response
+    Body: ข้อมูลจริง (JSON, XML, HTML, binary ฯลฯ)
+
+3.Asynchronous Operation
+    การ fetch เป็น non-blocking → FE ส่งคำร้องขอแล้วสามารถทำงานอื่นต่อไปได้
+    จึงต้องใช้ Callback, Promise, async/await เพื่อจัดการข้อมูลหลังจาก fetch เสร็จ
+
+4.Serialization / Deserialization
+    ข้อมูลส่งระหว่าง FE-BE ต้อง serialize เป็น string (เช่น JSON.stringify)
+    เมื่อรับกลับต้อง deserialize เป็น object (เช่น response.json())
+
+ขั้นตอนหลักของ Fetch
+    1.Initiate Request
+        FE เรียก API ผ่าน fetch/axios หรือ library อื่น
+    2.Send Request
+        HTTP request ถูกส่งไปยัง Server
+    3.Server Processing
+        BE รับ request → ประมวลผล logic → query database → prepare response
+    4.Send Response
+        Server ส่ง response กลับไปยัง FE
+    5.Handle Response
+        FE รับ response → แปลงข้อมูล → แสดงผล หรือ error handling
