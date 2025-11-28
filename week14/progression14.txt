@@ -1,0 +1,48 @@
+function renderButtons() {
+  const declaredPlanObj = getDeclaredPlan();
+  buttonArea.innerHTML = "";
+
+  const declareBtn = document.createElement("button");
+  const cancelBtn = document.createElement("button");
+
+  // Case 1: Not declared
+  if (!declaredPlanObj) {
+    cancelBtn.style.display = "none";
+    declareBtn.onclick = handleDeclare;
+    return;
+  }
+
+  // Case 2: Cancelled
+  if (declaredPlanObj.status === "CANCELLED") {
+    cancelBtn.style.display = "none";
+    declareBtn.onclick = handleDeclare;
+    return;
+  }
+
+  // Case 3: Declared
+  const changeBtn = document.createElement("button");
+  changeBtn.onclick = handleChange;
+  cancelBtn.onclick = handleCancelClick;
+}
+
+
+
+เป็นฟังก์ชั่น render ปุ่มตาม status
+
+
+
+document.addEventListener("DOMContentLoaded", ...)
+เป็นฟังก์ชันที่รอให้หน้าเว็บโหลดเสร็จก่อน แล้วค่อยเริ่มทำงาน
+ป้องกัน error เช่น ยังหา element ไม่เจอ
+
+getElementById("clickBtn")
+ใช้เพื่อเลือก element ใน HTML ที่มี id = clickBtn
+จะได้ element ปุ่มกลับมา
+
+btn.addEventListener("click", () => {...})
+เพิ่มเหตุการณ์ (event) ให้ปุ่ม
+เมื่อปุ่มถูก “คลิก” ให้รันโค้ดใน { ... }
+
+msg.textContent = "..." เปลี่ยนข้อความใน <p> แบบสดๆ
+
+msg.style.color = "blue" เปลี่ยนสีข้อความผ่าน JavaScript
